@@ -3,15 +3,15 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { StyleSheet } from 'react-native';
 
 export function GradientBackground({ children }) {
-  const color1 = '#5e5eb4' + '80';
-  const color2 = '#66E7A6' + '40';
-  const color3 = '#3AFBF7' + '40';
+  const color1 = '#264b89' + '80';
+  const color2 = '#7eb6ff' + '40';
+  const color3 = '#3Afbf7' + '10';
 
   return (
     <LinearGradient
       colors={[color1, color2, color3]}
       style={styles.container}
-      locations={[0.25, 0.75, 0.91]}
+      locations={[0.00, 0.65, 1.00]}
     >
       {children}
     </LinearGradient>
