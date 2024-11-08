@@ -1,6 +1,6 @@
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
-import { GradientBackground } from '../components/GradientBackground';
-import { typography } from '../styles/typography'; // typography import 추가
+import { GradientBackground } from '../../components/GradientBackground';
+import { typography } from '../../styles/typography'; // typography import 추가
 
 function Appliance() {
     return (
