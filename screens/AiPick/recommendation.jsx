@@ -1,6 +1,5 @@
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { GradientBackground } from '../../components/GradientBackground';
-import { Button } from '../../components/ui/button';
 import { typography } from '../../styles/typography';
 
 function Recommendation({ navigation, route }) {
@@ -31,16 +30,27 @@ function Recommendation({ navigation, route }) {
                         {/* 여기에 추천 결과 표시 */}
                     </View>
 
-                    <View style={styles.buttonContainer}>
-                        <Button onPress={handleConfirm} style={styles.button}>
-                            확인
-                        </Button>
-                        <Button onPress={handleCancel} variant="outline" style={styles.button}>
-                            취소
-                        </Button>
-                        <Button onPress={handleRecommend} variant="secondary" style={styles.button}>
-                            재추천
-                        </Button>
+                    <View style={styles.buttonGroupContainer}>
+                        <View style={styles.buttonGroup}>
+                            <TouchableOpacity 
+                                style={styles.segmentedButton} 
+                                onPress={handleConfirm}
+                            >
+                                <Text style={styles.buttonText}>수락</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity 
+                                style={styles.segmentedButton} 
+                                onPress={handleCancel}
+                            >
+                                <Text style={styles.buttonText}>거절</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity 
+                                style={styles.segmentedButton} 
+                                onPress={handleRecommend}
+                            >
+                                <Text style={styles.buttonText}>재추천</Text>
+                            </TouchableOpacity>
+                        </View>
                     </View>
                 </View>
             </SafeAreaView>
@@ -70,12 +80,35 @@ const styles = StyleSheet.create({
         fontSize: 16,
         marginBottom: 20,
     },
-    buttonContainer: {
+    buttonGroupContainer: {
         paddingHorizontal: 20,
         paddingBottom: 20,
-        gap: 10,
     },
-    button: {
-        marginVertical: 5,
+    buttonGroup: {
+        flexDirection: 'row',
+        backgroundColor: 'white',
+        borderRadius: 20,
+        padding: 5,
+        elevation: 3,
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.5,
+        shadowRadius: 3.84,
+    },
+    segmentedButton: {
+        flex: 1,
+        paddingVertical: 12,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 20,
+        marginHorizontal: 2,
+    },
+    buttonText: {
+        fontSize: 16,
+        fontWeight: '600',
+        color: '#666666',
     }
 });
