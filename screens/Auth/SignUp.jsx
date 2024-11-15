@@ -2,19 +2,17 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useState } from 'react';
 import { Alert, Text, TextInput, TouchableOpacity, View } from 'react-native';
-import DatePickerModal from '../../components/ui/DatePickerModal';
 import authStyles from '../../styles/authStyle';
 
 function SignUp({ navigation }) {
-  const [form, setForm] = useState({ name: '', email: '', password: '', phone: '', birthDate: '' });
-  const [showDatePicker, setShowDatePicker] = useState(false);
+  const [form, setForm] = useState({ name: '', email: '', password: '', phone: '' });
 
   const handleInputChange = (field, value) => {
     setForm({ ...form, [field]: value });
   };
 
   const handleSignUp = async () => {
-    if (!form.name || !form.email || !form.password || !form.phone || !form.birthDate) {
+    if (!form.name || !form.email || !form.password || !form.phone) {
       Alert.alert('모든 필드를 입력해주세요.');
       return;
     }
@@ -66,31 +64,15 @@ function SignUp({ navigation }) {
         onChangeText={(value) => handleInputChange('phone', value)}
       />
 
-      {/* 생년월일 입력 필드 */}
-      <TouchableOpacity style={authStyles.input} onPress={() => setShowDatePicker(true)}>
-        <Text>{form.birthDate || '생년월일'}</Text>
-      </TouchableOpacity>
-
       <TouchableOpacity style={authStyles.button} onPress={handleSignUp}>
         <Text style={authStyles.buttonText}>Sign Up</Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => navigation.navigate('Login')}>
         <Text style={authStyles.linkText}>이미 회원이신가요? Login</Text>
       </TouchableOpacity>
-
-      {showDatePicker && (
-        <DatePickerModal
-          visible={showDatePicker}
-          date={form.birthDate ? new Date(form.birthDate) : new Date()} // 선택된 생년월일 설정
-          onConfirm={(date) => {
-            handleInputChange('birthDate', date.toDateString());
-            setShowDatePicker(false);
-          }}
-          onCancel={() => setShowDatePicker(false)}
-        />
-      )}
     </View>
   );
 }
 
 export default SignUp;
+
