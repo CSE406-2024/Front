@@ -1,14 +1,37 @@
 import { Feather } from '@expo/vector-icons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useEffect, useState } from 'react';
 import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { GradientBackground } from '../components/GradientBackground';
 import { typography } from '../styles/typography';
 
 function MainPage() {
+  const [userName, setUserName] = useState('OO');
+
+  useEffect(() => {
+    const loadUserData = async () => {
+      try {
+        const userString = await AsyncStorage.getItem('currentUser');
+        if (userString) {
+          const user = JSON.parse(userString);
+          if (user.name) {
+            const nameWithoutFirst = user.name.slice(1) || 'OO'; // 성을 제외한 이름
+            setUserName(nameWithoutFirst);
+          }
+        }
+      } catch (error) {
+        console.error('Error loading user data:', error);
+      }
+    };
+
+    loadUserData();
+  }, []);
+
   return (
     <GradientBackground>
       <SafeAreaView style={styles.container}>
         <View style={styles.container}>
-          <Text style={[styles.title, typography.title]}>OO의 홈</Text>
+          <Text style={[styles.title, typography.title]}>{userName}의 홈</Text>
           
           <View style={styles.contentContainer}>
             <View style={styles.statusCard}>
